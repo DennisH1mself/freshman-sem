@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>The Dennis Quiz</title>
+  <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-image: url('dennis.jpg');
+      background-repeat: no-repeat;
+      background-size: 100vw 100vh;
+    }
+
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .content {
+      width: 20%;
+      height: 50%;
+      background-color: white;
+      padding: 20px;
+    }
+
+    .header {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+      color: black;
+    }
+
+    .start-button {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .start-button:hover {
+      background-color: black;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .quiz-display {
+
+      height: calc(100% - 40px);
+      width: 100%;
+    }
+
+    .question {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .answer {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="content">
+      <p class="header">
+        The Dennis Quiz
+      </p>
+      <button class="start-button">
+        Start!
+      </button>
+      <div class="quiz-display hidden">
+        <p class="question" id="question">
+          What is my favorite color?
+        </p>
+        <button class="answer" id="answer1">
+          Redsdfsdfasdfa
+        </button>
+        <button class="answer" id="answer2">
+          Blue
+        </button>
+        <button class="answer" id="answer3">
+          Green
+        </button>
+        <button class="answer" id="answer4">
+          Yellow
+        </button>
+      </div>
+      
+    </div>
+  </div>
+  <script>
+    const questions = [
+      {
+        question: 'What is my favorite color?',
+        answers: ['Red', 'Blue', 'Green', 'Yellow'],
+        correctAnswer: 'Red'
+      },
+      {
+        question: 'What is my favorite food?',
+        answers: ['Pizza', 'Sushi', 'Pasta', 'Salad'],
+        correctAnswer: 'Sushi'
+      },
+      {
+        question: 'What is my favorite animal?',
+        answers: ['Dog', 'Cat', 'Duck', 'Lion'],
+        correctAnswer: 'Duck'
+      },
+      {
+        question: 'What is my favorite TV show?',
+        answers: ['Breaking Bad', 'Game of Thrones', 'Friends', 'The Office'],
+        correctAnswer: 'Breaking Bad'
+      },
+      {
+        question: 'What is my favorite sport?',
+        answers: ['Football', 'Basketball', 'Cricket', 'Tennis'],
+        correctAnswer: 'Tennis'
+      },
+      {
+        question: 'Favorite hobby?',
+        answers: ['Travelling', 'Video Games', 'Programming', 'Rick Rolling'],
+        correctAnswer: 'Programming'
+      },
+      {
+        question: 'Favorite programming language?',
+        answers: ['Javascript', 'C++', 'Python', 'Assembly'],
+        correctAnswer: 'Python'
+      },
+      {
+        question: 'Favorite backend framework?',
+        answers: ['Next.js', 'Django', 'Ruby on Rails', 'Flask'],
+        correctAnswer: 'Django'
+      },
+      {
+        question: 'Favorite frontend framework?',
+        answers: ['React', 'Angular', 'Vue', 'Ember'],
+        correctAnswer: 'React'
+      },
+      {
+        question: 'Favorite class?',
+        answers: ['Statics', 'Design', 'Intro to Circuits', 'Energy Economics'],
+        correctAnswer: 'Design'
+      },
+      {
+        question: 'Age?',
+        answers: ['69', '16', '18', '2.3'],
+        correctAnswer: '16'
+      },
+      {
+        question: 'Height?',
+        answers: ['6 foot', "6'2''", "2'3''", "6'4''"],
+        correctAnswer: "6'2''"
+      },
+      
+      
+    
+    ]
+    const startButton = document.querySelector('.start-button');
+    const quizDisplay = document.querySelector('.quiz-display');
+    const question = document.getElementById('question');
+    const answers = document.querySelectorAll('.answer');
+
+    let currentQuestion = -1;
+
+    startButton.addEventListener('click', () => {
+      startButton.classList.add('hidden');
+      quizDisplay.classList.remove('hidden');
+    });
+    function rickRoll() {
+      window.location.href = ('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+      
+      // setTimeout(window.close(), 5000)
+    }
+    function nextQuestion() {
+      currentQuestion += 1;
+      if (currentQuestion < questions.length) {
+        console.log('Changing question');
+        question.innerText = questions[currentQuestion].question;
+        for (let i = 0; i < answers.length; i++) {
+          answers[i].innerText = questions[currentQuestion].answers[i];
+        }
+      } else {
+        alert('Congrats, you baller!');
+        rickRoll();
+      }
+      
+    }
+    nextQuestion();
+    answers.forEach(answer => {
+      answer.addEventListener('click', (e) => {
+        if (e.target.innerText == questions[currentQuestion].correctAnswer) {
+          nextQuestion();
+        } else {
+          alert('Rut roh raggy!');
+          rickRoll();
+
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
